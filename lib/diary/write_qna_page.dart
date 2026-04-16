@@ -66,7 +66,7 @@ class _WriteQnaPageState extends State<WriteQnaPage> {
               }
             },
             child: Container(
-              width: 87,
+              width: 100,
               height: 49,
               padding:
                   EdgeInsets.only(top: 18, bottom: 16, left: 20, right: 20),
