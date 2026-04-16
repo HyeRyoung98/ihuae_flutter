@@ -52,7 +52,7 @@ android {
         applicationId "com.ynhy.ihuae"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
+        minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -62,7 +62,9 @@ android {
             release {
                 keyAlias keystoreProperties['keyAlias']
                 keyPassword keystoreProperties['keyPassword']
-                storeFile file(keystoreProperties['storeFile'])
+                if (keystoreProperties['storeFile']) {
+                    storeFile file(keystoreProperties['storeFile'])
+                }
                 storePassword keystoreProperties['storePassword']
             }
         }
