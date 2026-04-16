@@ -25,27 +25,24 @@ class ChatContainer extends StatelessWidget {
         index: i,
       ));
     }
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: deviceHeight - statusBarHeight - 50 /*타이틀바*/ - 69 /*바텀네비게이션*/,
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                reverse: true,
-                child: Container(
-                  padding:
-                      EdgeInsets.only(top: 64, bottom: 0, left: 0, right: 0),
-                  child: Column(
-                    children: chatItems,
-                  ),
-                ),
-              ),
-            ), //입력 영역
-            InputContainer(chatDataService: chatDataService),
-          ],
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            reverse: false,
+            padding: EdgeInsets.only(top: 64),
+            itemCount: chatDataService.chatDataList.length,
+            itemBuilder: (context, i) {
+              final chatData = chatDataService.chatDataList[i];
+              return ChatItem(
+                messageContent: chatData.content,
+                index: i,
+              );
+            },
+          ),
         ),
-      ),
+        InputContainer(chatDataService: chatDataService),
+      ],
     );
   }
 }

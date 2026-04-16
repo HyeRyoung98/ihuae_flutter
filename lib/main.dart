@@ -105,38 +105,35 @@ class _BasePageState extends State<BasePage> {
               child: _widgetOptions.elementAt(_selectedIndex),
             ),
           ),
-          bottomNavigationBar: SizedBox(
-            height: 69,
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.white,
-              showSelectedLabels: false, // 선택된 라벨 보이기/숨기기
-              showUnselectedLabels: false, // 선택되지 않은 라벨 보이기/숨기기
-              elevation: 0,
-
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: ImageIcon(AssetImage('images/tab_on_ic_home.png')),
-                  label: 'home',
-                ),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(AssetImage('images/tab_on_ic_calendar.png')),
-                  label: 'calendar',
-                ),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(AssetImage('images/tab_on_ic_diary.png')),
-                  label: 'diary',
-                ),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(AssetImage('images/tab_on_ic_chat.png')),
-                  label: 'chat',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: Color(0xFF8291E6),
-              unselectedItemColor: Color(0xFFD9D9D9),
-              onTap: _onItemTapped,
-            ),
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            showSelectedLabels: false, // 선택된 라벨 보이기/숨기기
+            showUnselectedLabels: false, // 선택되지 않은 라벨 보이기/숨기기
+            elevation: 0,
+          
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('images/tab_on_ic_home.png')),
+                label: 'home',
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('images/tab_on_ic_calendar.png')),
+                label: 'calendar',
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('images/tab_on_ic_diary.png')),
+                label: 'diary',
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage('images/tab_on_ic_chat.png')),
+                label: 'chat',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Color(0xFF8291E6),
+            unselectedItemColor: Color(0xFFD9D9D9),
+            onTap: _onItemTapped,
           ),
         );
       });
