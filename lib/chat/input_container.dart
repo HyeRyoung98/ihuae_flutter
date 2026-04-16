@@ -6,8 +6,13 @@ class InputContainer extends StatefulWidget {
   const InputContainer({
     super.key,
     required this.chatDataService,
+    required this.onMessageSent,
+    required this.onInputFocused,
   });
   final ChatDataService chatDataService;
+  final VoidCallback onMessageSent;
+  final VoidCallback onInputFocused;
+
 
   @override
   State<InputContainer> createState() => _InputContainerState();
@@ -28,11 +33,33 @@ class _InputContainerState extends State<InputContainer> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
+
+    myFocusNode.addListener(() {
+      if (myFocusNode.hasFocus) {
+        widget.onInputFocused();
+      }
+    });
+  }
+
+  void _submitMessage() {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
+
+    widget.chatDataService.createChatData(text);
+
+    _controller.clear();
+    setState(() {
+      msgContent = "";
+    });
+
+    myFocusNode.requestFocus();
+    widget.onMessageSent();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    myFocusNode.dispose();
     super.dispose();
   }
 
@@ -78,13 +105,7 @@ class _InputContainerState extends State<InputContainer> {
           fontSize: 16,
         ),
         textInputAction: TextInputAction.done,
-        onFieldSubmitted: (_) {
-          widget.chatDataService.createChatData(msgContent);
-          setState(() {
-            msgContent = "";
-          });
-          _controller.clear();
-          myFocusNode.requestFocus();
+        onFieldSubmitted: (_) {_submitMessage();
         },
         onTapOutside: (event) {
           myFocusNode.unfocus();
